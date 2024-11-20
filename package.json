@@ -1,0 +1,31 @@
+{
+  "name": "portfolio",
+  "version": "1.0.0",
+  "description": "My personal portfolio",
+  "main": "index.js",
+  "scripts": {
+    "compile:sass": "node-sass sass/main.scss css/styles.css -w",
+    "start": "live-server",
+    "build": "npm run compile:sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vaibhavkulshrestha12/Portfolio-sass-.git"
+  },
+  
+  "devDependencies": {
+    "node-sass": "^9.0.0"
+  },
+  "dependencies": {
+    "live-server": "^1.2.1"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "keywords": [
+    "portfolio",
+    "website",
+    "frontend",
+    "developer"
+  ]
+}

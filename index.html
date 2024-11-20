@@ -1,0 +1,445 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="./images/profilephoto.jpg" style="width: auto;">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Marcellus&display=swap" rel="stylesheet" type="text/css">
+  <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+  rel="stylesheet"
+/>
+  <title>Vaibhav Kulshrestha</title>
+</head>
+
+<body>
+  <header class="header" id="header">
+    <nav class="header--main">
+      <ul class="header--main-nav">
+        <li class="nav-opt"><a href="#header">Home</a></li>
+        <li class="nav-opt"><a href="#about">About</a></li>
+        <li class="nav-opt"><a href="#portfolio">Projects</a></li>
+        <li class="nav-opt"><a href="#skills">Skills</a></li>
+        <li class="nav-opt"><a href="#contact">Contact</a></li>
+      </ul>
+      <ul class="header--main-social">
+        <li>
+          <a href="https://github.com/Vaibhavkulshrestha12" class="git" target="_blank">
+            <i class="fab fa-github small-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://www.linkedin.com/in/vaibhav-kulshrestha/" target="_blank">
+            <i class="fab fa-linkedin small-icon"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://discord.com/users/ÂLphA" target="_blank">
+            <i class="fab fa-discord small-icon"></i>
+          </a>
+        </li>
+        
+          
+      </ul>
+      <a>
+        <ion-icon name="reorder-three-outline" class="toggle-btn"></ion-icon>
+      </a>
+    </nav>
+    <div class="header__text-box">
+      <h1 class="heading-primary">
+        <span class="heading-primary--main">Vaibhav Kulshrestha</span>
+        
+        <span class="heading-primary--sub">Full-stack Developer</span>
+      </h1>
+      <a href="#projects" class="btn btn--full head-btn">MY WORK<ion-icon  name="arrow-forward-outline"></ion-icon></a>
+    </div>
+  </header>
+  <section class="section-about" id="about">
+    <div class="u-center-text u-margin-bottom-big">
+      <h2 class="heading-secondary">About</h2>
+    </div>
+    <div class="row">
+      <div class="col-1-of-2 ">
+        <div class="myimage">
+          <img src="images/profilephoto.jpg" alt="Profile-photo">
+        </div>
+
+      </div>
+      <div class="col-1-of-2 intro">
+        <h3 class="heading-tertiary" style="color:#041278;">About Me </h3>
+        <p class="myinfo"> I am a Fullstack Software Developer from India. <br>
+          Proficient in MERN and next js.bAlongside these I have projects in python, pygame and Golang. <br>
+          <br>
+          Worked on MongoDB, Firebase and PostgresSQL.
+          
+        </p>
+        <hr>
+      </div>
+    </div>
+  </section>
+  <section class="section-portfolio" id="portfolio">
+    <div class="u-center-text u-margin-bottom-big">
+      <h2 class="heading-secondary">My Projects</h2>
+    </div>
+    <div class="portfolio-container" id="portfolio-container">
+      
+    </div>
+  
+    <script>
+      
+      const username = "Vaibhavkulshrestha12";
+      const displayRepos = [
+        "Event-X", "ikeaclone", "gurudwara", "Sos-map", "Kisan-connect-frontend-web"
+      ];
+  
+      const token = 'github token ';
+  
+     
+      const customProjectData = {
+  "Event-X": {
+    description: "A dynamic event management system.",
+    languages: ["fab fa-js", "fab fa-html5", "fab fa-css3-alt", "fas fa-cloud"]
+,
+    imageUrl: "images/event.png" 
+  },
+  "ikeaclone": {
+    description: "An e-commerce app for IKEA products.",
+   languages: ["fab fa-node", "fab fa-html5", "fab fa-css3-alt", "fab fa-react", "fab fa-tailwindcss"]
+,
+    imageUrl: "images/ikea-clone.png"
+  },
+  "gurudwara": {
+    description: "A website for a Gurudwara to manage visitors.",
+    languages: ["fab fa-html5", "fab fa-css3-alt", "fab fa-js"],
+    imageUrl: "images/guru.png" 
+  },
+  "Sos-map": {
+    description: "A real-time SOS map application for emergencies.",
+    languages: ["fab fa-react", "fab fa-node", "fab fa-map"],
+    imageUrl: "images/map.png" 
+  },
+  "Kisan-connect-frontend-web": {
+    description: "A platform connecting farmers with buyers.",
+    languages: ["fab fa-react", "fab fa-css3-alt", "fab fa-js"],
+    imageUrl: "images/kissan.gif" 
+  }
+};
+
+
+
+fetch(`https://api.github.com/users/${username}/repos`, {
+  method: 'GET',
+  headers: {
+    'Authorization': `token ${token}`
+  }
+})
+.then(response => response.json())
+.then(data => {
+  const portfolioContainer = document.getElementById('portfolio-container');
+  if (!portfolioContainer) {
+    console.error('Portfolio container not found!');
+    return;
+  }
+
+  portfolioContainer.innerHTML = '';
+
+  data.forEach(repo => {
+    if (displayRepos.includes(repo.name)) {
+      const card = document.createElement('div');
+      card.classList.add('portfolio-card', 'flip-container', 'relative', 'mb-6', 'cursor-pointer', 'max-w-xs', 'w-full');
+      
+      
+      const customDescription = customProjectData[repo.name]?.description || "No description available";
+      const customLanguages = customProjectData[repo.name]?.languages || [];
+      const imageUrl = customProjectData[repo.name]?.imageUrl || 'images/placeholder.png'; 
+
+      card.innerHTML = `
+        <div class="flip-card-inner">
+          <a href="${repo.html_url}" target="_blank" class="w-full h-full">
+            <div class="flip-card-front">
+              <img src="${imageUrl}" alt="${repo.name}" class="portfolio-card-img w-full h-48 object-cover rounded-lg transition-all duration-300">
+              <div class="portfolio-card-info p-4">
+                <h3 class="text-xl font-semibold">${repo.name}</h3>
+                <p class="text-sm text-gray-600">${customDescription}</p>
+                <div class="languages-list flex mt-4">
+                  ${customLanguages.map(language => 
+                    `<div class="language-bubble"><i class="${language}"></i></div>`
+                  ).join('')}
+                </div>
+              </div>
+            </div>
+            <div class="flip-card-back">
+              <div class="back-content p-4">
+                <h3 class="text-lg font-semibold mb-4">Technologies Used:</h3>
+                <ul class="languages-list">
+                  ${customLanguages.map(language => 
+                    `<li class="language-icon"><i class="${language}"></i></li>`
+                  ).join('')}
+                </ul>
+              </div>
+            </div>
+          </a>
+        </div>
+      `;
+
+      portfolioContainer.appendChild(card);
+    }
+  });
+})
+.catch(error => {
+  console.error('Error fetching data from GitHub API:', error);
+});
+    </script>
+  </section>
+  
+  
+  
+
+
+
+<style>
+ .portfolio-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.flip-container {
+  perspective: 1000px;
+  display: inline-block;
+  width: 100%;
+  max-width: 350px;
+  height: 500px;
+  margin: 10px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  cursor: pointer;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.flip-card-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-container:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-front {
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flip-card-back {
+  background-color: #fff;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.languages-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 5px;
+}
+
+.language-icon {
+  background-color: #e0e0e0;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.portfolio-card-info p {
+  margin-bottom: 10px;
+}
+
+.portfolio-card-img {
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.flip-card-inner a {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.flip-container:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease;
+}
+
+/* Responsive Media Queries */
+@media (max-width: 768px) {
+  .flip-container {
+    max-width: 280px;
+    height: 450px;
+  }
+
+  .portfolio-container {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .flip-container {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+
+.language-bubble {
+  background-color: #f1f1f1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.language-bubble img {
+  width: 20px;
+  height: 20px;
+}
+
+.languages-list {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+.portfolio-card-info {
+  padding-top: 10px;
+}
+
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+}
+
+.flip-card-inner {
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.6s;
+}
+
+.flip-container:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front, .flip-card-back {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+
+</style>
+
+  
+  
+  
+  
+  <section class="section-skills" id="skills">
+    <div class="u-center-text u-margin-bottom-big">
+      <h2 class="heading-secondary">Skills I Know</h2>
+    </div>
+    <div class="skills-container">
+      <p align="center">
+        <img src="https://skillicons.dev/icons?i=react,nodejs,html,js,css,bootstrap,sass,tailwind,firebase,threejs,ts,vite,mongodb,wordpress,python,c,cpp,babel,figma,bash,vscode,jenkins,express,git,nextjs,vue,npm,postgres,postman,redis,mysql,vercel&perline=8&theme=dark" />
+      </p>
+    </div>
+  </section>
+  
+
+  <section class="section-form" id="contact">
+    <div class="u-center-text ">
+      <h2 class="heading-secondary" style="padding-top: 17px;">Contact Me</h2>
+      <p class="heading-tertiary">I would like to hear from you</p>
+    </div>
+    <div class="row">
+      <form method="post" data-netlify="true" class="contact-form" name="contact">
+        <div class="row u-center-text">
+          <input type="text" name="name" id="name" placeholder="Name" required>
+        </div>
+        <div class="row u-center-text">
+          <input type="email" name="email" id="email" placeholder="Email" required>
+        </div>
+        <div class="row u-center-text">
+          <textarea name="message" placeholder="Drop me a line"></textarea>
+        </div>
+        <div class="row u-center-text">
+          <input type="submit" value="Send it!">
+        </div>
+      </form>
+  </section>
+
+  <footer>
+    <div class="row footer-content">
+      <div class="u-center-text">
+        <ul class="footer--main-social">
+          <li>
+            <a href="https://github.com/Vaibhavkulshrestha12" class="git" target="_blank">
+              <i class="fab fa-github small-icon"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://www.linkedin.com/in/vaibhav-kulshrestha/" target="_blank">
+              <i class="fab fa-linkedin small-icon"></i>
+            </a>
+          </li>
+          <li>
+            <a href="https://discord.com/users/ÂLphA" target="_blank">
+              <i class="fab fa-discord small-icon"></i>
+            </a>
+          </li>
+          
+        </ul>
+      </div>
+      <div class="u-center-text">
+        <p>
+          Copyright &copy; 2024 by Vaibhav Kulshrestha. @All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script src="js/zenscroll-min.js"></script>
+  <script src="js/script.js"></script>
+</body>
+
+</html>

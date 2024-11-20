@@ -1,0 +1,29 @@
+footer{
+    background-color: $color-grey-light-1;
+
+    &--main-social{
+        list-style: none;
+        & li{
+            display: inline-block;
+            margin-left: 2rem;
+            margin-right: 2rem;
+            & a:link,
+            & a:visited {
+                text-decoration: none;
+                color: #fff; }
+        }
+        
+        @include respond(tab-port){
+            width: 100%;
+            margin-top: 2rem;
+         }
+    }
+
+    & p{
+        margin-bottom: 2.5rem;
+        color: $font-primary;
+        width: 100%;
+        margin-top: 2.5rem;
+    }
+}
+

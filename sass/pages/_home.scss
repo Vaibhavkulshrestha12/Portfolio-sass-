@@ -1,0 +1,29 @@
+.section-about{
+    background-color: $color-grey-light-1;
+    padding: 6rem 0;
+
+    @include respond(tab-port){
+        padding: 4rem 0;
+        text-align: center;
+     }
+}
+
+.skills{
+    list-style: none;
+    padding: 2rem;
+}
+.skill{
+    padding: 2rem;
+}
+.section-project{
+    padding:8rem 0;
+    @include respond(tab-port){
+        padding: 4rem 0;
+        text-align: center;
+     }
+}
+
+.homepage-icon{
+    vertical-align: middle;
+}
+
